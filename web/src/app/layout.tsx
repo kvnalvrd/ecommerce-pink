@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Noto_Serif, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 
 const notoSerif = Noto_Serif({
   subsets: ["latin"],
@@ -27,9 +29,13 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${notoSerif.variable} ${plusJakartaSans.variable} font-sans antialiased bg-neutral text-tertiary`}
+        className={`${notoSerif.variable} ${plusJakartaSans.variable} font-sans antialiased bg-neutral text-tertiary flex min-h-screen flex-col`}
       >
-        {children}
+        <Header />
+        <main className="flex-1">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );
