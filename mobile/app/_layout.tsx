@@ -3,9 +3,10 @@ import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import { useFonts } from 'expo-font';
 import { NotoSerif_400Regular, NotoSerif_700Bold } from '@expo-google-fonts/noto-serif';
 import { PlusJakartaSans_400Regular, PlusJakartaSans_500Medium, PlusJakartaSans_600SemiBold, PlusJakartaSans_700Bold } from '@expo-google-fonts/plus-jakarta-sans';
-import { theme } from './theme';
+import { theme } from '../theme';
+import { Stack } from 'expo-router';
 
-export default function App() {
+export default function RootLayout() {
   let [fontsLoaded] = useFonts({
     NotoSerif_400Regular,
     NotoSerif_700Bold,
@@ -24,11 +25,13 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>E-commerce Pink</Text>
-      <Text style={styles.subtitle}>Experiencia de compra rápida, elegante y accesible.</Text>
+    <>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="product/[id]" options={{ title: 'Product Details' }} />
+      </Stack>
       <StatusBar style="auto" />
-    </View>
+    </>
   );
 }
 
@@ -42,18 +45,5 @@ const styles = StyleSheet.create({
   },
   loadingContainer: {
     backgroundColor: theme.colors.background,
-  },
-  title: {
-    fontFamily: theme.typography.headings.fontFamily,
-    fontSize: 32,
-    color: theme.colors.primary,
-    marginBottom: theme.spacing.small,
-    textAlign: 'center',
-  },
-  subtitle: {
-    fontFamily: theme.typography.body.fontFamily,
-    fontSize: 16,
-    color: theme.colors.tertiary,
-    textAlign: 'center',
   },
 });
